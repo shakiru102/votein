@@ -72,13 +72,13 @@ export default {
     sockets: [{
       default: true,
       name: 'main',
-      url: 'http://localhost:8000'
+      url: 'https://votein-server.herokuapp.com'
     }]
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: process.env.BASE_URL || 'http://localhost:8000/api',
+    baseURL: process.env.BASE_URL || 'http://localhost:8000',
   },
   // auth: {
   //   strategies: {
