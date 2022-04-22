@@ -75,28 +75,12 @@ export default {
       url: 'https://votein-server.herokuapp.com'
     }]
   },
-  // Axios module configuration: https://go.nuxtjs.dev/config-axios
+
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.BASE_URL || 'http://localhost:8000',
   },
-  // auth: {
-  //   strategies: {
-  //     local: {
-  //       token: {
-  //         required: false,
-  //         type: false
-  //       },
-  //      endpoints: {
-  //         login: { uri: '/user/signin', method: 'post' },
-  //         logout: { uri: '/user/signout', method: 'get' },
-  //         user: { uri: '/user/auth', method: 'get', propertyName: 'data' }
-  //      }
-  //     }
-  //   }
-  // },
-
-  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
+  
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
