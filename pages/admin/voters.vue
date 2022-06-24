@@ -5,22 +5,20 @@
     </div>
 </template>
 <script lang="ts">
-import { defineComponent, onMounted } from "@nuxtjs/composition-api"
+import { defineComponent, onMounted, ref, useContext } from "@nuxtjs/composition-api"
+import { userDetails } from "~/types/interface"
 
 
 
 export default  defineComponent({
 
     data: () => ({ 
-        data: [
-            { mobile: "08064778486", firstname: "Ladipo", lastname: "Fiwajomi", voterid: "00049", },
-        ] ,
         headers: [
             { class: 'subtitle-1 green accent-1', align: "center", text: 'S/N', value: 'number' },
             { class: 'subtitle-1 green accent-1', align: "center", text: 'First name', value: 'firstname' },
             { class: 'subtitle-1 green accent-1', align: "center", text: 'Last name', value: 'lastname' },
-            { class: 'subtitle-1 green accent-1', align: "center", text: 'Voter ID', value: 'voterid' },
-            { class: 'subtitle-1 green accent-1', align: "center", text: 'Mobile', value: 'mobile' },
+            { class: 'subtitle-1 green accent-1', align: "center", text: 'Voter ID', value: 'voterID' },
+            { class: 'subtitle-1 green accent-1', align: "center", text: 'Mobile', value: 'phonenumber' },
         ],
     }),
     computed: {
@@ -33,7 +31,17 @@ export default  defineComponent({
     },
 
     setup(){
-        
+
+       const { $axios } = useContext()
+       const data = ref<userDetails[]>([])
+        onMounted(async () => {
+            const res = await $axios.$get('/admin/voters')
+            console.log(res);
+            
+            data.value = res
+        })
+
+        return { data }
     }
     
 

@@ -46,25 +46,25 @@ export default {
     '@nuxtjs/axios',
     'nuxt-socket-io',
     ['cookie-universal-nuxt', { alias: 'cookiz' }],
-    [
-      '@nuxtjs/firebase',
-      {
-        config: {
-          apiKey: "AIzaSyCa1C_GJ0DJFbkhMW2-aR50IFypi1rSkx8",
-          authDomain: "votein-56a10.firebaseapp.com",
-          databaseURL: "https://votein-56a10-default-rtdb.firebaseio.com",
-          projectId: "votein-56a10",
-          storageBucket: "votein-56a10.appspot.com",
-          messagingSenderId: "725574556802",
-          appId: "1:725574556802:web:1e833aeb339b300306289b",
-          measurementId: "G-S16HNRTJ2N"
-        },
-        services: {
-          auth: true,
-          firestore: true
-        }
-      }
-    ],
+    // [
+    //   '@nuxtjs/firebase',
+    //   {
+    //     config: {
+    //       apiKey: "AIzaSyCa1C_GJ0DJFbkhMW2-aR50IFypi1rSkx8",
+    //       authDomain: "votein-56a10.firebaseapp.com",
+    //       databaseURL: "https://votein-56a10-default-rtdb.firebaseio.com",
+    //       projectId: "votein-56a10",
+    //       storageBucket: "votein-56a10.appspot.com",
+    //       messagingSenderId: "725574556802",
+    //       appId: "1:725574556802:web:1e833aeb339b300306289b",
+    //       measurementId: "G-S16HNRTJ2N"
+    //     },
+    //     services: {
+    //       auth: true,
+    //       firestore: true
+    //     }
+    //   }
+    // ],
     'nuxt-highcharts'
   ],
   io: {
@@ -72,13 +72,14 @@ export default {
     sockets: [{
       default: true,
       name: 'main',
-      url: 'https://votein-server.herokuapp.com'
+      // url: 'https://votein-server.herokuapp.com'
+      url: 'http://localhost:8000'
     }]
   },
 
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: process.env.BASE_URL || 'http://localhost:8000',
+    baseURL: process.env.BASE_URL || 'http://localhost:8000/api',
   },
   
   vuetify: {

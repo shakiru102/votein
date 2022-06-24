@@ -42,6 +42,8 @@
                     <v-list-item-subtitle class="white--text">{{ item.name }}</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
+
+
                 <v-list-item @click="dialog = !dialog" v-if="$store.state.user.admin"  style="margin-top: 15em;"  class="white--text"> 
                   <v-list-item-icon>
                     <v-icon color="white">mdi-cog-outline</v-icon>
@@ -80,6 +82,32 @@
                  dense
                   v-model="title"
                ></v-text-field>
+               <v-row>
+                 <v-col cols="6">
+                   <label for="title-input">Date</label>
+               <v-text-field
+                 name="name"
+                 id="title-input"
+                 color="green"
+                 outlined
+                 dense
+                 type="date"
+                  v-model="dateInput"
+               ></v-text-field>
+                 </v-col>
+                 <v-col cols="6">
+                     <label for="title-input">Time</label>
+               <v-text-field
+                 name="name"
+                 id="title-input"
+                 color="green"
+                 outlined
+                 dense
+                 suffix="am"
+                  v-model="timeInput"
+               ></v-text-field>
+                 </v-col>
+               </v-row>
              </v-card-text>
              <v-card-actions>
                <v-btn :loading="loading" @click="saveElectionTItle" class="text-capitalize" min-width="118px"  style="box-shadow: 0px 14px 50px rgba(13, 117, 76, 0.22);" tile large dark color="#04A967">Save</v-btn>
@@ -87,6 +115,19 @@
              </v-card-actions>
         </v-card>
       </v-dialog>
+
+
+       <v-snackbar
+        v-model="snackbar"
+        color="#FFCDD2"
+        top
+        elevation="0"
+      >
+      <v-spacer></v-spacer>
+      <div class="caption black--text text-center">
+        {{ errortext }}
+      </div>
+      </v-snackbar>
     </div>
 </template>
 
@@ -109,6 +150,10 @@ export default defineComponent ({
     const loading = ref<boolean>(false)
     const dialog = ref<boolean>(false)
     const title =  ref<string>('')
+    const dateInput = ref<string>('')
+    const timeInput = ref<string>('')
+    const errortext = ref<string>('')
+    const snackbar = ref<boolean>(false)
   //  Methods
     const signout = async () => {
          await store.dispatch('removeUserSession')
@@ -118,14 +163,15 @@ export default defineComponent ({
     const saveElectionTItle = async () => {
           try {
              loading.value = true
-             await $axios.$post('/admin/electiontitle', { electionDate: title.value } )
+             await $axios.$post('/admin/electiontitle', { electionDate: title.value, date: dateInput.value, time: timeInput.value, admin: `${ store.state.user.lastname } ${ store.state.user.firstname }` } )
              loading.value = false
              title.value = '',
              dialog.value = false
           } catch (error: any) {
-            loading.value = false
-             title.value = '',
-             dialog.value = false
+            snackbar.value = true
+             errortext.value = error.response.data
+             loading.value = false
+
           }
     }
 
@@ -134,7 +180,11 @@ export default defineComponent ({
        loading,
        dialog,
        title,
-       saveElectionTItle
+       saveElectionTItle,
+       dateInput,
+       timeInput,
+       snackbar,
+       errortext
      }
   }
 })
