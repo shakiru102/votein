@@ -73,7 +73,7 @@ export default {
       default: true,
       name: 'main',
       // url: 'https://votein-server.herokuapp.com'
-      url: 'http://localhost:8000'
+      url: 'https://votein-server.herokuapp.com'
     }]
   },
 
