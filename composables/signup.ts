@@ -85,10 +85,17 @@ export default () => {
 
  }
  const openDialog = async () => {
-     await $axios.post('/biometrics/initiateEnroll',{ id: 'create id'})
-    registered.value = false
     biometrics.value = null
-    dialog.value = true
+    try {
+        const res = await $axios.post('/biometrics/initiateEnroll',{ id: 'create id'})
+    if(res.status === 200) {
+        registered.value = true
+        dialog.value = true
+    }
+    } catch (error: any) {
+        dialog.value = false
+        registered.value = true
+    }
 
  }
 
