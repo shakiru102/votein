@@ -94,7 +94,7 @@ export default () => {
     }
     } catch (error: any) {
         dialog.value = false
-        registered.value = true
+        registered.value = false
     }
 
  }
