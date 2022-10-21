@@ -102,7 +102,7 @@ export default defineComponent({
             socket.on('vote', payload => {
                 if(dialog.value){
                     store.dispatch('initiateVoteToken', payload)
-                    dialog.value = !dialog.value
+                    dialog.value = false
                     router.push('/admin/uservote')
 
                 }

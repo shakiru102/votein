@@ -1,12 +1,12 @@
 <template>
-    <div class="px-10 mt-5 overflow-hidden">
+    <div class="px-10 mt-3 ">
         <v-container class="mb-5">
           <v-row v-if="present"> 
                <v-col cols="3" v-for="(item, index) in dashboardDetails" :key="index">
                    <v-card tile :color="item.color" height="147px" flat>
                        <v-card-text class="d-flex justify-space-betwwen">
                            <div class="white--text mr-2">
-                               <div class="display-1 font-weight-bold">{{ item.no }}</div>
+                               <div class="title font-weight-bold">{{ item.no }}</div>
                                <div class="subtitle-1 font-weight-bold">No</div>
                                <div class="subtitle-1 font-weight-bold">of {{ item.title }}</div>
                            </div>
@@ -17,7 +17,7 @@
                </v-col>
               </v-row>            
         </v-container>
-        <v-carousel hide-delimiters hide-delimiter-background cycle show-arrows-on-hover>
+        <v-carousel hide-delimiters hide-delimiter-background cycle show-arrows-on-hover height="100%" >
             <v-carousel-item
             v-for="(item, index) in position"
             :key="index"
