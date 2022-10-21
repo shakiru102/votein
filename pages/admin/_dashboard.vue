@@ -11,7 +11,6 @@ export default defineComponent({
 </script>
 <style scoped>
 .content{
-    height: 91.5vh;
-    overflow: hidden;
+    height: 100vh;
 }
 </style>
