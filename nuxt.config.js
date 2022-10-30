@@ -67,12 +67,13 @@ export default {
     // ],
     'nuxt-highcharts'
   ],
+  
   io: {
     // module options
     sockets: [{
       default: true,
       name: 'main',
-      // url: 'https://votein-server.herokuapp.com'
+      // url: 'http://localhost:8000'
       url: 'https://votein-server.herokuapp.com'
     }]
   },
@@ -80,6 +81,7 @@ export default {
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
     baseURL: process.env.BASE_URL || 'https://votein-server.herokuapp.com/api',
+    // baseURL: process.env.BASE_URL || 'http://localhost:8000/api',
   },
   
   vuetify: {

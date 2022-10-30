@@ -4,7 +4,7 @@ import { adminDetails, userDetails } from "~/types/interface"
 
 export const state = () => ({
     
-    user: null as userDetails | null,
+    user: null as userDetails | null | adminDetails,
     voterDetails: null as userDetails | null,
     voting: false as boolean,
     continue: false as boolean

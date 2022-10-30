@@ -5,6 +5,7 @@ export interface adminDetails {
     password: string;
     admin: boolean;
     electionDate: string;
+    super?: boolean
 }
 
 export interface userDetails  {

@@ -28,6 +28,7 @@ export default defineComponent({
     Cardlayout, 
   },
   name: 'onBoardPage',
+  middleware: 'isAdminLoggedIn', 
 })
 </script>
 

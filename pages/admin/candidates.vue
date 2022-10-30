@@ -3,6 +3,7 @@
      <head-content > Candidates </head-content>
      <datatable :tabLoading="tabLoading" :deleteData="deleteData" :headers="headers" :items="items" :editData="editData" >
          <v-btn 
+         v-if="$store.state.user.super"
             @click="addNew"
             color="#04A967"
             dark 
@@ -144,6 +145,8 @@ import Candidate from '~/composables/candidate'
 export default defineComponent({
     components: { HeadContent, Datatable},
     setup(){
+
+      
        const {
         data,
         headers,

@@ -1,5 +1,8 @@
 # votein
 
+The project is current pointing to the server online if you intend to run it on a local server
+go into the nuxt.config.js file and set the axios and io BASE_URL and url respectively to point to your desired server
+
 ## Build Setup
 
 ```bash
@@ -40,7 +43,6 @@ More information about the usage of this directory in [the documentation](https:
 Layouts are a great help when you want to change the look and feel of your Nuxt app, whether you want to include a sidebar or have distinct layouts for mobile and desktop.
 
 More information about the usage of this directory in [the documentation](https://nuxtjs.org/docs/2.x/directory-structure/layouts).
-
 
 ### `pages`
 

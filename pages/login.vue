@@ -64,6 +64,7 @@ export default  defineComponent({
   data: () => ({
       check: false 
   }),
+  middleware: 'isLoggedIn',
 
   mounted(){
     this.initGlobal(this)

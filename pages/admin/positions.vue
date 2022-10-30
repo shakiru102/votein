@@ -3,6 +3,7 @@
      <head-content  > Positions </head-content>
       <datatable :tabLoading="tabLoading" :deleteData="deleteData"  :headers="headers" :items="items" :editData="editData" >
         <v-btn 
+        v-if="$store.state.user.super"
             @click="addNew"
             color="#04A967"
             dark 

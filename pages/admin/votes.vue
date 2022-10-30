@@ -22,6 +22,9 @@ import { computed, defineComponent, onMounted, ref, useContext } from '@nuxtjs/c
 import { candidateDetails } from '~/types/interface'
 import Positions from '~/composables/positions'
 export default defineComponent({
+
+    middleware: 'votes',
+
     setup(){
       const { $axios, store } = useContext()
 

@@ -125,6 +125,7 @@ export default defineComponent({
   mounted() {
     this.initIO(this)
   },
+  middleware: 'isLoggedIn',
  
     setup() {
         const {

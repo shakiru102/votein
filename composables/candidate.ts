@@ -21,14 +21,26 @@ const candidate = () => {
     const party = ref<string>('')
     const position = ref<string>('')
     const updateData = ref<candidateDetails | null>(null)
-    const headers = ref<object[]>([
+    const headers = ref<object[]>(
+      store.state.user.super ? 
+      [ 
         { class: 'subtitle-1 green accent-1', align: "center", text: 'S/N', value: 'number' },
         { class: 'subtitle-1 green accent-1', align: "center", text: 'First name', value: 'firstname' },
         { class: 'subtitle-1 green accent-1', align: "center", text: 'Last name', value: 'lastname' },
         { class: 'subtitle-1 green accent-1', align: "center", text: 'Position', value: 'position' },
         { class: 'subtitle-1 green accent-1', align: "center", text: 'Platform', value: 'party' },
-        { class: 'subtitle-1 green accent-1', align: "center", text: 'Tools', value: 'actions' },
-    ])
+        { class: 'subtitle-1 green accent-1', align: "center", text: 'Tools', value: 'actions' }
+    ] : 
+    [ 
+      { class: 'subtitle-1 green accent-1', align: "center", text: 'S/N', value: 'number' },
+      { class: 'subtitle-1 green accent-1', align: "center", text: 'First name', value: 'firstname' },
+      { class: 'subtitle-1 green accent-1', align: "center", text: 'Last name', value: 'lastname' },
+      { class: 'subtitle-1 green accent-1', align: "center", text: 'Position', value: 'position' },
+      { class: 'subtitle-1 green accent-1', align: "center", text: 'Platform', value: 'party' },
+  ]
+      )
+
+    
 
     const headersUser = ref<object[]>([
       { class: 'subtitle-1 green accent-1', align: "center", text: 'S/N', value: 'number' },
@@ -42,6 +54,8 @@ const candidate = () => {
         tabLoading.value = !tabLoading.value
         await $axios.$get(`/candidate?electionDate=${ store.state.user.electionDate }`).then( res => data.value = res)   
         tabLoading.value = !tabLoading.value
+
+        
 
      })
     // Computed

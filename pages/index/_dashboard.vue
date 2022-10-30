@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="electionTitle">
      <head-content > {{ electionTitle.electionDate }} SRC ELECTIONS </head-content>
      <v-card class="pa-16 mx-16" flat tile color="#F9FDFA"> 
         <v-card-text>
@@ -23,7 +23,7 @@ import { defineComponent, onMounted, ref, useContext } from '@nuxtjs/composition
 export default defineComponent({
     setup(){
        
-       const electionTitle = ref<string>('')
+       const electionTitle = ref<any>()
       const { $axios } = useContext()
        onMounted(async () => {
             const title = await $axios.$get('/currentElectionTitle')

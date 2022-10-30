@@ -3,12 +3,12 @@
         <v-container class="mb-5">
           <v-row v-if="present"> 
                <v-col cols="3" v-for="(item, index) in dashboardDetails" :key="index">
-                   <v-card tile :color="item.color" height="147px" flat>
+                   <v-card tile :color="item.color" max-height="147px" flat>
                        <v-card-text class="d-flex justify-space-betwwen">
                            <div class="white--text mr-2">
                                <div class="title font-weight-bold">{{ item.no }}</div>
-                               <div class="subtitle-1 font-weight-bold">No</div>
-                               <div class="subtitle-1 font-weight-bold">of {{ item.title }}</div>
+                               <div class="subtitle-1 font-weight-bold">No of</div>
+                               <div class="subtitle-1 font-weight-bold">{{ item.title }}</div>
                            </div>
                            <v-img class="ml-2" contain width="80px" height="80px" :src="require(`@/assets/${ item.img }.png`)"></v-img>
                        </v-card-text>
@@ -17,7 +17,7 @@
                </v-col>
               </v-row>            
         </v-container>
-        <v-carousel hide-delimiters hide-delimiter-background cycle show-arrows-on-hover height="100%" >
+        <v-carousel v-if="$store.state.user.super" hide-delimiters hide-delimiter-background cycle show-arrows-on-hover height="100%" >
             <v-carousel-item
             v-for="(item, index) in position"
             :key="index"
@@ -25,6 +25,23 @@
             <highchart :options="barChartData(item.position)" />
             </v-carousel-item>
         </v-carousel>
+        <div v-else>
+     <v-card  class="pa-5 mx-3" flat tile color ="#F9FDFA" v-if ="electionTitle"> 
+        <v-card-text>
+            <p>
+                Information is necessary for efficient functioning in every sphere of human endeavour. For the  {{ electionTitle.electionDate }} Elections in particular, some basic information can be helpful in understanding and interpreting the processes. This compendium is designed to provide such basic information.
+            </p>
+            <p>
+                The Information is a compilation of electoral information about when the Student Representative Council Elections will be conducted. These bits of information will be useful for anyone wishing to follow and understand the polling process. It is hoped that voters, media professionals and election observers, among others, will find this information handy in understanding the processes of the general election.
+            </p>
+            <p>
+                The {{ electionTitle.electionDate }} SRC will kick off on:
+            </p>
+            <p style="color: #039058; font-size: 22px; font-weight: 600">{{ electionTitle.date || '25th of July, 2022 ' }}at {{ electionTitle.time || '10:00'}}am</p>
+            <p style="font-weight: 600">{{ electionTitle.admin || 'Tiamiyu Mubarak O.' }}<br/><span style="font-weight: normal;">admin</span> </p>
+        </v-card-text>
+     </v-card>
+    </div>
     </div>
 </template>
 
@@ -41,6 +58,9 @@ export default defineComponent({
         const present = ref<boolean>(false)
         const chartVotes = ref<editPosition[]>([])
 
+            const electionTitle = ref<any>()
+      
+
         const dashboardDetails = ref<dashboardDetails[]>([
             { title: 'Positions', color: '#1ABEDB', btncolor: '#317A88', no: 0, to: '/admin/positions', img: 'Group15' },
             { title: 'Candidates', color: '#05F595', btncolor: '#0A9C62', no: 0, to: '/admin/candidates', img: 'whh_details' },
@@ -52,6 +72,10 @@ export default defineComponent({
    
         onMounted(async () => {
             present.value = false
+
+            const title = await $axios.$get('/currentElectionTitle')
+            electionTitle.value = title.electionDate
+
             await $axios.$get('/position').then(res => {
                 position.value = res
                 dashboardDetails.value[0].no = res.length
@@ -156,7 +180,8 @@ export default defineComponent({
             dashboardDetails,
             present,
             barChartData,
-            position
+            position,
+            electionTitle
         }
     },
 })

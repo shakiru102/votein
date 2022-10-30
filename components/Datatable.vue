@@ -14,7 +14,7 @@
             <template v-slot:item.votes="{ item }">
                 <div>{{ electedVotes(item._id, item.position) }}</div>
             </template> 
-               <template v-slot:item.actions="{ item }">
+               <template v-slot:item.actions="{ item }" >
                 <v-icon
                     small
                     class="mr-2"

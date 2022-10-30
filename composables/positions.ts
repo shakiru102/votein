@@ -3,7 +3,7 @@ import { editPosition } from '~/types/interface'
 
 const utilty = () => {
   // Context
-  const { $axios } = useContext()
+  const { $axios, store } = useContext()
     // Data
     const data = ref<object[]>([]) 
     const editDataDetail = ref<editPosition | null>(null) 
@@ -18,12 +18,20 @@ const utilty = () => {
     const description = ref<string>('')
     const resMessage = ref<string>('')
     const maxVote = ref<string>('')
-    const headers = ref<object[]>([
+    const headers = ref<object[]>( 
+      store.state.user.super ? 
+      [
         { class: 'subtitle-1 green accent-1', align: "center", text: 'S/N', value: 'number' },
         { class: 'subtitle-1 green accent-1', align: "center", text: 'Description', value: 'position' },
         { class: 'subtitle-1 green accent-1', align: "center", text: 'Maximum Vote', value: 'maxVote' },
-        { class: 'subtitle-1 green accent-1', align: "center", text: 'Tools', value: 'actions' },
-    ])
+       { class: 'subtitle-1 green accent-1', align: "center", text: 'Tools', value: 'actions' }
+    ] : 
+    [
+      { class: 'subtitle-1 green accent-1', align: "center", text: 'S/N', value: 'number' },
+      { class: 'subtitle-1 green accent-1', align: "center", text: 'Description', value: 'position' },
+      { class: 'subtitle-1 green accent-1', align: "center", text: 'Maximum Vote', value: 'maxVote' },
+    ]
+      )
 
     // Computed
 const items = computed(() => {

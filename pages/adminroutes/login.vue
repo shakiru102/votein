@@ -65,7 +65,7 @@ export default  defineComponent({
   }),
 
 
-  // middleware: 'loggedin', 
+  middleware: 'isAdminLoggedIn', 
   setup(){
     const { 
        email,

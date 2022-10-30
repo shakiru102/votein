@@ -44,7 +44,7 @@
                 </v-list-item>
 
 
-                <v-list-item @click="dialog = !dialog" v-if="$store.state.user.admin"  style="margin-top: 15em;"  class="white--text"> 
+                <v-list-item @click="dialog = !dialog" v-if="$store.state.user.super"  style="margin-top: 15em;"  class="white--text"> 
                   <v-list-item-icon>
                     <v-icon color="white">mdi-cog-outline</v-icon>
                   </v-list-item-icon>
@@ -157,7 +157,7 @@ export default defineComponent ({
   //  Methods
     const signout = async () => {
          await store.dispatch('removeUserSession')
-        router.push('/welcome')
+        store.state.user.admin ? router.push('/adminroutes/welcome') : router.push('/welcome')
     }
 
     const saveElectionTItle = async () => {
